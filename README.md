@@ -13,31 +13,36 @@ Once the script has been set as AutoLoad, you will be able to call SceneManager.
 
 * To queue a scene or asset for loading, type:
 
-SceneLoader.load_scene("res://my_scene.tscn", { prop1 = "Hi!" })
+`SceneLoader.load_scene("res://my_scene.tscn", { prop1 = "Hi!" })`
 
 * To be notified about the end of the scene loading, add this to your _ready() function:
 
+```javascript
 func _ready():
     SceneLoader.connect("on_scene_loaded", self, "do_scene_loaded")
 
 func do_scene_loaded(scene):
     # Do something with the scene
     pass
-
+```
 * The SceneLoader will pass an object with following structure to your do_scene_loaded function:
 
+```javascript
 { 
     path = path, 
     loader = (ResourceInteractiveLoader), 
     instance = (your scene instance), 
     props = props (Properties you passed with the load_scene call) 
 }
+```
 
 * You can now add the scene to the scene tree, examine the props and filter by path:
 
+```javascript
 if scene.path == "res://my_scene.tscn":
     print(scene.props.prop1)
     add_child(scene.instance)
+```
 
 # Additional info
 
